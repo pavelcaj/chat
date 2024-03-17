@@ -1,7 +1,7 @@
 package com.example.chat.servise;
 
 
-import com.example.chat.dto.UserDTO;
+import com.example.chat.chat.User;
 import com.example.chat.rep.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,24 +17,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserDTO createUser(String login) {
-        UserDTO newUser = new UserDTO();
+    public User createUser(String login) {
+        User newUser = new User();
         newUser.setLogin(login);
         return userRepository.save(newUser);
     }
 
-    public List<UserDTO> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<UserDTO> getUserById(Integer id) {
+    public Optional<User> getUserById(Integer id) {
         return userRepository.findById(id);
     }
 
     public void updateUser(Integer id, String newLogin) {
-        Optional<UserDTO> existingUser = userRepository.findById(id);
+        Optional<User> existingUser = userRepository.findById(id);
         if (existingUser.isPresent()) {
-            UserDTO user = existingUser.get();
+            User user = existingUser.get();
             user.setLogin(newLogin);
             userRepository.save(user);
         }
